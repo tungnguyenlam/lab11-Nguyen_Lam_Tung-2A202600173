@@ -9,6 +9,7 @@ Usage:
     python main.py --part 3     # Run only Part 3 (testing pipeline)
     python main.py --part 4     # Run only Part 4 (HITL design)
 """
+
 import sys
 import asyncio
 import argparse
@@ -53,6 +54,7 @@ async def part2_guardrails():
         test_topic_filter,
         test_input_plugin,
     )
+
     test_injection_detection()
     print()
     test_topic_filter()
@@ -62,6 +64,7 @@ async def part2_guardrails():
     # Part 2B: Output guardrails
     print("\n--- Part 2B: Output Guardrails ---")
     from guardrails.output_guardrails import test_content_filter, _init_judge
+
     _init_judge()  # Initialize LLM judge if TODO 7 is done
     test_content_filter()
 
@@ -69,6 +72,7 @@ async def part2_guardrails():
     print("\n--- Part 2C: NeMo Guardrails ---")
     try:
         from guardrails.nemo_guardrails import init_nemo, test_nemo_guardrails
+
         init_nemo()
         await test_nemo_guardrails()
     except ImportError:
@@ -129,6 +133,7 @@ async def main(parts=None):
         parts: List of part numbers to run, or None for all
     """
     setup_api_key()
+    setup_model_provider()
 
     if parts is None:
         parts = [1, 2, 3, 4]
@@ -155,7 +160,9 @@ if __name__ == "__main__":
         description="Lab 11: Guardrails, HITL & Responsible AI"
     )
     parser.add_argument(
-        "--part", type=int, choices=[1, 2, 3, 4],
+        "--part",
+        type=int,
+        choices=[1, 2, 3, 4],
         help="Run only a specific part (1-4). Default: run all.",
     )
     args = parser.parse_args()

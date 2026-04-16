@@ -61,7 +61,10 @@ jupyter notebook notebooks/lab11_guardrails_hitl.ipynb
 ```bash
 cd src/
 pip install -r ../requirements.txt
-export GOOGLE_API_KEY="your-api-key-here"
+
+# Copy and configure environment variables
+cp ../.env.example ../.env
+# Edit ../.env and add your API keys
 
 # Run the full lab
 python main.py
@@ -77,6 +80,9 @@ python guardrails/input_guardrails.py
 python guardrails/output_guardrails.py
 python testing/testing.py
 python hitl/hitl.py
+
+# Test model wrapper with different providers
+python ../test_model_wrapper.py
 ```
 
 ### Tools Used
@@ -84,6 +90,18 @@ python hitl/hitl.py
 - **Google ADK** — Agent Development Kit (plugins, runners)
 - **NeMo Guardrails** — NVIDIA framework with Colang (declarative safety rules)
 - **Gemini 2.5 Flash/Flash Lite** — LLM backend (you can switch to other models if you want)
+
+### Model Providers Support
+
+The lab now supports multiple model providers through a unified ModelWrapper interface:
+
+- **Google** (default) - Uses Google ADK with Gemini models
+- **OpenAI** - Supports GPT models via official OpenAI API
+- **OpenRouter** - Access to various models through OpenRouter gateway
+- **ShopAIKey** - Custom provider with specific headers and base URL
+- **LiteLLM** - Generic provider mode for models like Anthropic, Groq, Together, and local OpenAI-compatible hosts
+
+To switch providers, set the `MODEL_PROVIDER` environment variable, provide the corresponding API key, and optionally set `*_MODEL_NAME` variables.
 
 ## Lab Structure (2.5 hours)
 
@@ -128,4 +146,3 @@ python hitl/hitl.py
 - [AI Safety Fundamentals](https://aisafetyfundamentals.com/)
 - [AI Red Teaming Guide](https://github.com/requie/AI-Red-Teaming-Guide)
 - [antoan.ai - AI Safety Vietnam](https://antoan.ai)
-

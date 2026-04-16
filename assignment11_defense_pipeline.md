@@ -44,23 +44,23 @@ User Input
     │
     ▼
 ┌─────────────────────┐
-│  Rate Limiter        │ ← Prevent abuse (too many requests)
+│  Rate Limiter       │ ← Prevent abuse (too many requests)
 └─────────┬───────────┘
           ▼
 ┌─────────────────────┐
-│  Input Guardrails    │ ← Injection detection + topic filter + NeMo rules
+│  Input Guardrails   │ ← Injection detection + topic filter + NeMo rules
 └─────────┬───────────┘
           ▼
 ┌─────────────────────┐
-│  LLM (Gemini)        │ ← Generate response
+│  LLM (Gemini)       │ ← Generate response
 └─────────┬───────────┘
           ▼
 ┌─────────────────────┐
-│  Output Guardrails   │ ← PII filter + LLM-as-Judge (multi-criteria)
+│  Output Guardrails  │ ← PII filter + LLM-as-Judge (multi-criteria)
 └─────────┬───────────┘
           ▼
 ┌─────────────────────┐
-│  Audit & Monitoring  │ ← Log everything + alert on anomalies
+│  Audit & Monitoring │ ← Log everything + alert on anomalies
 └─────────┬───────────┘
           ▼
       Response
